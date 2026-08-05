@@ -5,8 +5,12 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../lib/generated/prisma"
+  provider   = "prisma-client"
+  output     = "../lib/generated/prisma"
+  // Native library query engine. PrismaClient connects directly to
+  // DATABASE_URL; Next.js traces the engine binary into the serverless
+  // function automatically.
+  engineType = "library"
 }
 
 datasource db {

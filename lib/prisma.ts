@@ -4,4 +4,5 @@
 // `prisma-client-js` generator is configured, so import from the generated
 // client directly.
 import { PrismaClient } from "./generated/prisma/client";
+
 export const prisma = new PrismaClient();
