@@ -4,6 +4,15 @@
 import "dotenv/config";
 import { defineConfig, env } from "prisma/config";
 
+// `prisma generate` only needs the datasource URL to be *defined* (it never
+// connects to the database), so fall back to a placeholder when DATABASE_URL
+// is absent. This keeps `prisma generate` (and therefore Vercel builds)
+// working before a real database is wired up. Runtime connections still need
+// a real URL set in the environment.
+const databaseUrl =
+  process.env.DATABASE_URL ??
+  "postgresql://placeholder:placeholder@localhost:5432/attendance";
+
 export default defineConfig({
   schema: "prisma/schema.prisma",
   migrations: {
@@ -11,6 +20,6 @@ export default defineConfig({
   },
   engine: "classic",
   datasource: {
-    url: env("DATABASE_URL"),
+    url: databaseUrl,
   },
 });

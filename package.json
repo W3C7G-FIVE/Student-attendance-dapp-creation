@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "predev": "node scripts/sync-abi.mjs",
+    "predev": "node scripts/sync-abi.mjs && prisma generate",
     "build": "next build",
-    "prebuild": "node scripts/sync-abi.mjs",
+    "prebuild": "node scripts/sync-abi.mjs && prisma generate",
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
