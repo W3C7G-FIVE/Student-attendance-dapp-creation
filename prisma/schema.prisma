@@ -11,6 +11,10 @@ generator client {
   // DATABASE_URL; Next.js traces the engine binary into the serverless
   // function automatically.
   engineType = "library"
+  // Vercel builds on a Debian/OpenSSL 1.1 image but runs functions on a
+  // RHEL/OpenSSL 3.0 image, so generate must ship engines for both
+  // platforms or the lambda can't locate its query engine at runtime.
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
